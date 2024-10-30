@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.UI;
 
 public class Clock : MonoBehaviour
 {
     // Поля
-    public int minutes = 0;
-    public int hour = 0;
-    public int seconds = 0;
+    public static int minutes = 0;
+    public static int hour = 0;
+    public static int seconds = 0;
 
     public GameObject pointerSeconds;
     public GameObject pointerMinutes;
@@ -20,7 +21,7 @@ public class Clock : MonoBehaviour
     // Скорость времени
     public float clockSpeed = 1.0f;
 
-    //-- internal vars
+    
     private float _msecs = 0;
 
     void Update()
@@ -47,13 +48,16 @@ public class Clock : MonoBehaviour
             UpdateClock();
         }
     }
-
+    private void Start()
+    {
+        timeInputField.ActivateInputField();
+    }
     void UpdateClock()
     {
         // Обновление текстового вывода времени
-        secondsTMP.text = seconds.ToString("D2");
-        minutesTMP.text = minutes.ToString("D2");
-        hourTMP.text = hour.ToString("D2");
+        secondsTMP.text = seconds.ToString();
+        minutesTMP.text = minutes.ToString();
+        hourTMP.text = hour.ToString();
 
         // Математика стрелок
         float rotationSeconds = (360.0f / 60.0f) * seconds;
