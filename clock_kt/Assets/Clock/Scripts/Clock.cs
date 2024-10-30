@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using TMPro;
@@ -5,29 +6,28 @@ using UnityEngine.UI;
 
 public class Clock : MonoBehaviour
 {
-    // Поля
-    public static int minutes = 0;
-    public static int hour = 0;
-    public static int seconds = 0;
+    // поля
+    public static int minutes { get; set; }
+    public static int hours { get; set; }
+    public static int seconds { get; set; }
 
-    public GameObject pointerSeconds;
-    public GameObject pointerMinutes;
-    public GameObject pointerHours;
-    public TextMeshProUGUI secondsTMP;
-    public TextMeshProUGUI minutesTMP;
-    public TextMeshProUGUI hourTMP;
-    public TMP_InputField timeInputField;
+    [SerializeField] private GameObject pointerSeconds;
+    [SerializeField] private GameObject pointerMinutes;
+    [SerializeField] private GameObject pointerHours;
+    [SerializeField] private TextMeshProUGUI secondsTMP;
+    [SerializeField] private TextMeshProUGUI minutesTMP;
+    [SerializeField] private TextMeshProUGUI hourTMP;
 
-    // Скорость времени
-    public float clockSpeed = 1.0f;
+    // скорость времени
+    private readonly float _clockSpeed = 1.0f;
 
     
-    private float _msecs = 0;
+    private float _msecs;
 
     void Update()
     {
-        // Счетчик времени
-        _msecs += Time.deltaTime * clockSpeed;
+        // счетчик времени
+        _msecs += Time.deltaTime * _clockSpeed;
         if (_msecs >= 1.0f)
         {
             _msecs -= 1.0f;
@@ -39,57 +39,32 @@ public class Clock : MonoBehaviour
                 if (minutes >= 60)
                 {
                     minutes = 0;
-                    hour++;
-                    if (hour >= 24)
-                        hour = 0;
+                    hours++;
+                    if (hours >= 23)
+                        hours = 0;
                 }
             }
 
             UpdateClock();
         }
     }
-    private void Start()
+
+    private void UpdateClock()
     {
-        timeInputField.ActivateInputField();
-    }
-    void UpdateClock()
-    {
-        // Обновление текстового вывода времени
+        //  вывод времени текстом
         secondsTMP.text = seconds.ToString();
         minutesTMP.text = minutes.ToString();
-        hourTMP.text = hour.ToString();
+        hourTMP.text = hours.ToString();
 
-        // Математика стрелок
-        float rotationSeconds = (360.0f / 60.0f) * seconds;
-        float rotationMinutes = (360.0f / 60.0f) * minutes;
-        float rotationHours = ((360.0f / 12.0f) * hour) + ((360.0f / (60.0f * 12.0f)) * minutes);
+        // математика стрелок
+        var rotationSeconds = (360.0f / 60.0f) * seconds;
+        var rotationMinutes = (360.0f / 60.0f) * minutes;
+        var rotationHours = ((360.0f / 12.0f) * hours) + ((360.0f / (60.0f * 12.0f)) * minutes);
 
-        // Изменение положения стрелок
+        // изменение положения стрелок
         pointerSeconds.transform.localEulerAngles = new Vector3(0.0f, 0.0f, rotationSeconds);
         pointerMinutes.transform.localEulerAngles = new Vector3(0.0f, 0.0f, rotationMinutes);
         pointerHours.transform.localEulerAngles = new Vector3(0.0f, 0.0f, rotationHours);
-    }
-
-    public void SetTimeFromInputField(string timeString)
-    {
-        string[] timeParts = timeString.Split(':');
-        if (timeParts.Length == 3 &&
-            int.TryParse(timeParts[0], out int newHours) &&
-            int.TryParse(timeParts[1], out int newMinutes) &&
-            int.TryParse(timeParts[2], out int newSeconds))
-        {
-            hour = newHours % 24;
-            minutes = newMinutes % 60;
-            seconds = newSeconds % 60;
-
-            UpdateClock();
-        }
-    }
-
-    // Метод для вызова при окончании редактирования текста в TMP_InputField
-    public void OnTimeInputEndEdit(string input)
-    {
-        SetTimeFromInputField(input);
     }
     
     
