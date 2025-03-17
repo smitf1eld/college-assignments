@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class AddMenuController : MonoBehaviour
+//public class AddMenuController : MonoBehaviour
 {
     public TMP_Dropdown resourceDropdown;
     public TMP_InputField amountInput;
