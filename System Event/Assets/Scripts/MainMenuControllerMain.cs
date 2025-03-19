@@ -21,7 +21,7 @@ public class MainMenuControllerMain : UIController
     public override void Exit()
     {
         // Логика при выходе из состояния главного меню
-       
+       _mainMenuView.Hide();
         Debug.Log("Exited Main Menu");
     }
 
@@ -29,4 +29,5 @@ public class MainMenuControllerMain : UIController
     {
         _resourcePool.ResetResources();
     }
+    
 }

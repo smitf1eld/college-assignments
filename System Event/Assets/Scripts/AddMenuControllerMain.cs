@@ -23,7 +23,7 @@ public class AddMenuControllerMain : UIController
 
     public override void Exit()
     {
-        // Логика при выходе из состояния добавления ресурсов
+        _addMenuView.Hide();
         Debug.Log("Exited Add Menu");
     }
 

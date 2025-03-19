@@ -6,7 +6,14 @@ public class RemoveMenuControllerMain : UIController
 {
     private ResourcePool _resourcePool;
     private RemoveMenuView _removeMenuView;
-    public RemoveMenuControllerMain(UISwitcher switcher, RemoveMenuView removeMenuView, ResourcePool resourcePool) : base(switcher) { }
+
+    public RemoveMenuControllerMain(UISwitcher switcher, RemoveMenuView removeMenuView, ResourcePool resourcePool) :
+        base(switcher)
+    {
+        _removeMenuView = removeMenuView;
+        _resourcePool = resourcePool;
+    }
+    
 
     public override void Enter()
     {
@@ -18,6 +25,7 @@ public class RemoveMenuControllerMain : UIController
     public override void Exit()
     {
         // Логика при выходе из состояния удаления ресурсов
+        _removeMenuView.Hide();
         Debug.Log("Exited Remove Menu");
     }
 
