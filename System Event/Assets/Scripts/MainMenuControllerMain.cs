@@ -15,14 +15,12 @@ public class MainMenuControllerMain : UIController
     {
         // Логика при входе в состояние главного меню
         _mainMenuView.Show(ResetResourse);
-        Debug.Log("Entered Main Menu");
     }
 
     public override void Exit()
     {
         // Логика при выходе из состояния главного меню
        _mainMenuView.Hide();
-        Debug.Log("Exited Main Menu");
     }
 
     private void ResetResourse()

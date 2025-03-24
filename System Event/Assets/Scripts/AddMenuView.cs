@@ -14,14 +14,14 @@ public class AddMenuView : MonoBehaviour
 
     private void Awake()
     {
-        // Добавляем слушатель на кнопку один раз
+        // Добавляем слушатель на кнопку
         addButton.onClick.AddListener(OnAddButtonClicked);
     }
 
-    public void Show(Action<ResourceType, int> addButtonCallBack)
+    public void Show()
     {
         gameObject.SetActive(true);
-        _addButtonCallBack = addButtonCallBack;
+        
     }
 
     public void Construct(ResourcePool resourcePool)
@@ -33,7 +33,6 @@ public class AddMenuView : MonoBehaviour
     {
         // Получаем текущий выбранный тип ресурса
         ResourceType resourceType = (ResourceType)resourceFirstDropdown.value;
-
         // Проверяем ввод
         if (int.TryParse(amountFirstInput.text, out int amount))
         {

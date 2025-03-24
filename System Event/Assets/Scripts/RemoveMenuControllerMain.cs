@@ -4,33 +4,25 @@ using UnityEngine;
 
 public class RemoveMenuControllerMain : UIController
 {
-    private ResourcePool _resourcePool;
     private RemoveMenuView _removeMenuView;
 
-    public RemoveMenuControllerMain(UISwitcher switcher, RemoveMenuView removeMenuView, ResourcePool resourcePool) :
+    public RemoveMenuControllerMain(UISwitcher switcher, RemoveMenuView removeMenuView) :
         base(switcher)
     {
         _removeMenuView = removeMenuView;
-        _resourcePool = resourcePool;
     }
     
 
     public override void Enter()
     {
         // Логика при входе в состояние удаления ресурсов
-        _removeMenuView.Show(RemoveResoursee);
-        Debug.Log("Entered Remove Menu");
+        _removeMenuView.Show();
     }
 
     public override void Exit()
     {
         // Логика при выходе из состояния удаления ресурсов
         _removeMenuView.Hide();
-        Debug.Log("Exited Remove Menu");
     }
-
-    private void RemoveResoursee(ResourceType type, int count)
-    {
-        _resourcePool.DeductResource(type, count);
-    }
+    
 }

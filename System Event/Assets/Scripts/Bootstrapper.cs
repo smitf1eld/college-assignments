@@ -19,9 +19,9 @@ public class Bootstrapper : MonoBehaviour
         // Инициализация UISwitcher и других классов
         _uiSwitcher = new UISwitcher();
         _resourcePool = new ResourcePool(mainMenuView);
-        _addMenuController = new AddMenuControllerMain(_uiSwitcher, _resourcePool, addMenuView);
+        _addMenuController = new AddMenuControllerMain(_uiSwitcher, addMenuView);
         _mainMenuController = new MainMenuControllerMain(_uiSwitcher, _resourcePool, mainMenuView);
-        _removeMenuController = new RemoveMenuControllerMain(_uiSwitcher, removeMenuView, _resourcePool);
+        _removeMenuController = new RemoveMenuControllerMain(_uiSwitcher, removeMenuView);
         
 
         // Переход в начальное состояние (например, MainMenu)

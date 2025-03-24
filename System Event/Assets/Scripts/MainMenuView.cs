@@ -11,15 +11,7 @@ public class MainMenuView : MonoBehaviour
     private ResourceItem _resourceItem;
     private bool _isInitialized = false; // Флаг инициализации
 
-    private void Awake()
-    {
-        // Проверяем, что все необходимые компоненты назначены
-        if (_itemsPrefab == null || _rectTransformPanel == null || _resetButton == null)
-        {
-            Debug.LogError("One or more components are not assigned in the inspector.");
-            return;
-        }
-    }
+  
 
     public void Show(Action resetButtonCallBack)
     {

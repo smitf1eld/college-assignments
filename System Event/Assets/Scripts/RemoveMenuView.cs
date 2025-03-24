@@ -18,10 +18,9 @@ public class RemoveMenuView : MonoBehaviour
         removeButton.onClick.AddListener(OnRemoveButtonClicked);
     }
     
-    public void Show(Action<ResourceType, int> removeButtonCallBack)
+    public void Show()
     {
         gameObject.SetActive(true);
-        _removeButtonCallBack = removeButtonCallBack;
     }
     
     public void Construct(ResourcePool resourcePool)
